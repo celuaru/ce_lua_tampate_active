@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Auto Assemble script"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+EnableInfiniteHealthCheat()
+{$asm}
+ 
+ 
+[DISABLE]
+{$lua}
+DisableInfiniteHealthCheat()
+{$asm}
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <LuaScript>InfiniteHealthScript = [[
+[ENABLE]
+{$lua}
+Print("ENABLE")
+{$asm}
+
+[DISABLE]
+{$lua}
+Print("DISABLE")
+{$asm}
+]]
+
+
+function EnableInfiniteHealthCheat()
+  if not InfiniteHealthCheatIsEnabled then
+    InfiniteHealthCheatIsEnabled,InfiniteHealthCheatDisableinfo = autoAssemble(InfiniteHealthScript)
+  end
+end
+
+function DisableInfiniteHealthCheat()
+  if InfiniteHealthCheatIsEnabled then
+    if autoAssemble(InfiniteHealthScript,InfiniteHealthCheatDisableinfo) then
+      InfiniteHealthCheatIsEnabled = false
+    end
+  end
+end
+
+</LuaScript>
+</CheatTable>
